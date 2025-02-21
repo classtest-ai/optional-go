@@ -13,6 +13,11 @@ func Empty[T any]() Opt[T] {
 	return Opt[T]{*new(T), false}
 }
 
+func (o *Opt[T]) Set(value T) {
+	o.value = value
+	o.isPresent = true
+}
+
 func (o Opt[T]) IsPresent() bool {
 	return o.isPresent
 }
