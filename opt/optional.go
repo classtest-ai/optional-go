@@ -9,6 +9,13 @@ func Of[T any](value T) Opt[T] {
 	return Opt[T]{value, true}
 }
 
+func From[T any](from func() *T) Opt[T] {
+	if value := from(); value != nil {
+		return Opt[T]{*value, true}
+	}
+	return Opt[T]{*new(T), false}
+}
+
 func Empty[T any]() Opt[T] {
 	return Opt[T]{*new(T), false}
 }
