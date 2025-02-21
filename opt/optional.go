@@ -41,3 +41,10 @@ func (o Opt[T]) OrElsePanic() T {
 	}
 	panic("Opt is empty")
 }
+
+func (o *Opt[T]) Default(other T) {
+	if !o.isPresent {
+		o.value = other
+		o.isPresent = true
+	}
+}
