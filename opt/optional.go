@@ -27,6 +27,13 @@ func Empty[T any]() Opt[T] {
 	return Opt[T]{*new(T), false}
 }
 
+func (o Opt[T]) Predicate(predicate func(value T) bool) bool {
+	if o.isPresent {
+		return predicate(o.value)
+	}
+	return false
+}
+
 func (o *Opt[T]) Clear() {
 	o.value = *new(T)
 	o.isPresent = false
