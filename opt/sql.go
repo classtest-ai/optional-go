@@ -33,6 +33,13 @@ func FromSQLNullInt32(n sql.NullInt32) Opt[int32] {
 	return Empty[int32]()
 }
 
+func FromSQLNullInt(n sql.NullInt32) Opt[int] {
+	if n.Valid {
+		return Of(int(n.Int32))
+	}
+	return Empty[int]()
+}
+
 func FromSQLNullInt16(n sql.NullInt16) Opt[int16] {
 	if n.Valid {
 		return Of(n.Int16)
@@ -92,6 +99,13 @@ func ToSQLNullInt64(o Opt[int64]) sql.NullInt64 {
 func ToSQLNullInt32(o Opt[int32]) sql.NullInt32 {
 	if o.IsPresent() {
 		return sql.NullInt32{Int32: o.value, Valid: true}
+	}
+	return sql.NullInt32{}
+}
+
+func ToSQLNullInt(o Opt[int]) sql.NullInt32 {
+	if o.IsPresent() {
+		return sql.NullInt32{Int32: int32(o.value), Valid: true}
 	}
 	return sql.NullInt32{}
 }
