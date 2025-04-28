@@ -79,3 +79,10 @@ func (o *Opt[T]) Default(other T) {
 		o.isPresent = true
 	}
 }
+
+func (o *Opt[T]) EqualsTo(other Opt[T], equals func(first T, second T) bool) bool {
+	if o.IsPresent() && other.IsPresent() {
+		return equals(o.value, other.value)
+	}
+	return !o.isPresent && !other.isPresent
+}
