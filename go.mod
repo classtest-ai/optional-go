@@ -1,4 +1,4 @@
-module git.classtest.ai/classtest/optional-go
+module github.com/classtest-ai/optional-go
 
 go 1.23.1
 
